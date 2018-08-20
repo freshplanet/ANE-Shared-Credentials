@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1669A14A2DFED9AF09592173 /* libPods-AirSharedCredentials.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35708F94020243352E35E1A8 /* libPods-AirSharedCredentials.a */; };
+		FAEC6194212B2FB9001E2D2B /* AirSharedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEC6193212B2FB9001E2D2B /* AirSharedCredentials.m */; };
+		FAEC6195212B2FB9001E2D2B /* AirSharedCredentials.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FAEC6192212B2FB9001E2D2B /* AirSharedCredentials.h */; };
+		FAEC619E212B30E8001E2D2B /* FPANEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEC619D212B30E8001E2D2B /* FPANEUtils.m */; };
+		FAEC61A1212B314D001E2D2B /* SharedWebCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEC619F212B314D001E2D2B /* SharedWebCredentials.m */; };
+		FAEC61A4212B3170001E2D2B /* AirSharedCredentialsTextInput.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEC61A2212B3170001E2D2B /* AirSharedCredentialsTextInput.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FAEC61A6212B3249001E2D2B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEC61A5212B3249001E2D2B /* Security.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FAEC618D212B2FB9001E2D2B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				FAEC6195212B2FB9001E2D2B /* AirSharedCredentials.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0A5D7B7F975DAC6D49F9EFCF /* Pods-AirSharedCredentials.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirSharedCredentials.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirSharedCredentials/Pods-AirSharedCredentials.debug.xcconfig"; sourceTree = "<group>"; };
+		35708F94020243352E35E1A8 /* libPods-AirSharedCredentials.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirSharedCredentials.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6DF3C6474AEC58806C852BD /* Pods-AirSharedCredentials.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirSharedCredentials.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirSharedCredentials/Pods-AirSharedCredentials.release.xcconfig"; sourceTree = "<group>"; };
+		FAEC618F212B2FB9001E2D2B /* libAirSharedCredentials.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirSharedCredentials.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAEC6192212B2FB9001E2D2B /* AirSharedCredentials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirSharedCredentials.h; sourceTree = "<group>"; };
+		FAEC6193212B2FB9001E2D2B /* AirSharedCredentials.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirSharedCredentials.m; sourceTree = "<group>"; };
+		FAEC619B212B30E8001E2D2B /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
+		FAEC619C212B30E8001E2D2B /* FPANEUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPANEUtils.h; sourceTree = "<group>"; };
+		FAEC619D212B30E8001E2D2B /* FPANEUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPANEUtils.m; sourceTree = "<group>"; };
+		FAEC619F212B314D001E2D2B /* SharedWebCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedWebCredentials.m; sourceTree = "<group>"; };
+		FAEC61A0212B314D001E2D2B /* SharedWebCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedWebCredentials.h; sourceTree = "<group>"; };
+		FAEC61A2212B3170001E2D2B /* AirSharedCredentialsTextInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirSharedCredentialsTextInput.m; sourceTree = "<group>"; };
+		FAEC61A3212B3170001E2D2B /* AirSharedCredentialsTextInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirSharedCredentialsTextInput.h; sourceTree = "<group>"; };
+		FAEC61A5212B3249001E2D2B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FAEC618C212B2FB9001E2D2B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAEC61A6212B3249001E2D2B /* Security.framework in Frameworks */,
+				1669A14A2DFED9AF09592173 /* libPods-AirSharedCredentials.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5EEECBCC43F1626B1F48A50E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAEC61A5212B3249001E2D2B /* Security.framework */,
+				35708F94020243352E35E1A8 /* libPods-AirSharedCredentials.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FAEC6186212B2FB9001E2D2B = {
+			isa = PBXGroup;
+			children = (
+				FAEC619B212B30E8001E2D2B /* FlashRuntimeExtensions.h */,
+				FAEC619C212B30E8001E2D2B /* FPANEUtils.h */,
+				FAEC619D212B30E8001E2D2B /* FPANEUtils.m */,
+				FAEC6191212B2FB9001E2D2B /* AirSharedCredentials */,
+				FAEC6190212B2FB9001E2D2B /* Products */,
+				FC905B755A213C25CF482694 /* Pods */,
+				5EEECBCC43F1626B1F48A50E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FAEC6190212B2FB9001E2D2B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAEC618F212B2FB9001E2D2B /* libAirSharedCredentials.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FAEC6191212B2FB9001E2D2B /* AirSharedCredentials */ = {
+			isa = PBXGroup;
+			children = (
+				FAEC61A3212B3170001E2D2B /* AirSharedCredentialsTextInput.h */,
+				FAEC61A2212B3170001E2D2B /* AirSharedCredentialsTextInput.m */,
+				FAEC61A0212B314D001E2D2B /* SharedWebCredentials.h */,
+				FAEC619F212B314D001E2D2B /* SharedWebCredentials.m */,
+				FAEC6192212B2FB9001E2D2B /* AirSharedCredentials.h */,
+				FAEC6193212B2FB9001E2D2B /* AirSharedCredentials.m */,
+			);
+			path = AirSharedCredentials;
+			sourceTree = "<group>";
+		};
+		FC905B755A213C25CF482694 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0A5D7B7F975DAC6D49F9EFCF /* Pods-AirSharedCredentials.debug.xcconfig */,
+				F6DF3C6474AEC58806C852BD /* Pods-AirSharedCredentials.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FAEC618E212B2FB9001E2D2B /* AirSharedCredentials */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAEC6198212B2FB9001E2D2B /* Build configuration list for PBXNativeTarget "AirSharedCredentials" */;
+			buildPhases = (
+				CCE5450E0CC7A89D89C3C3AC /* [CP] Check Pods Manifest.lock */,
+				FAEC618B212B2FB9001E2D2B /* Sources */,
+				FAEC618C212B2FB9001E2D2B /* Frameworks */,
+				FAEC618D212B2FB9001E2D2B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirSharedCredentials;
+			productName = AirSharedCredentials;
+			productReference = FAEC618F212B2FB9001E2D2B /* libAirSharedCredentials.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FAEC6187212B2FB9001E2D2B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = FreshPlanet;
+				TargetAttributes = {
+					FAEC618E212B2FB9001E2D2B = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = FAEC618A212B2FB9001E2D2B /* Build configuration list for PBXProject "AirSharedCredentials" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FAEC6186212B2FB9001E2D2B;
+			productRefGroup = FAEC6190212B2FB9001E2D2B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FAEC618E212B2FB9001E2D2B /* AirSharedCredentials */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CCE5450E0CC7A89D89C3C3AC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AirSharedCredentials-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FAEC618B212B2FB9001E2D2B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAEC619E212B30E8001E2D2B /* FPANEUtils.m in Sources */,
+				FAEC61A1212B314D001E2D2B /* SharedWebCredentials.m in Sources */,
+				FAEC6194212B2FB9001E2D2B /* AirSharedCredentials.m in Sources */,
+				FAEC61A4212B3170001E2D2B /* AirSharedCredentialsTextInput.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FAEC6196212B2FB9001E2D2B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FAEC6197212B2FB9001E2D2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FAEC6199212B2FB9001E2D2B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A5D7B7F975DAC6D49F9EFCF /* Pods-AirSharedCredentials.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MTD42E59Y9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FAEC619A212B2FB9001E2D2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6DF3C6474AEC58806C852BD /* Pods-AirSharedCredentials.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MTD42E59Y9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FAEC618A212B2FB9001E2D2B /* Build configuration list for PBXProject "AirSharedCredentials" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAEC6196212B2FB9001E2D2B /* Debug */,
+				FAEC6197212B2FB9001E2D2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAEC6198212B2FB9001E2D2B /* Build configuration list for PBXNativeTarget "AirSharedCredentials" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAEC6199212B2FB9001E2D2B /* Debug */,
+				FAEC619A212B2FB9001E2D2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FAEC6187212B2FB9001E2D2B /* Project object */;
+}
