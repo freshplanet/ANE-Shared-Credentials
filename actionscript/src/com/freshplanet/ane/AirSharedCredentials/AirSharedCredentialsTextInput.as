@@ -160,6 +160,9 @@ package com.freshplanet.ane.AirSharedCredentials {
 				case AirSharedCredentialsTextInputEvent.RETURN:
 					dispatchEvent(new AirSharedCredentialsTextInputEvent(AirSharedCredentialsTextInputEvent.RETURN));
 					break;
+				case AirSharedCredentialsTextInputEvent.TEXT_CHANGED:
+					dispatchEvent(new AirSharedCredentialsTextInputEvent(AirSharedCredentialsTextInputEvent.TEXT_CHANGED));
+					break;
 			}
 
 

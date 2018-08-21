@@ -80,6 +80,11 @@
     FREDispatchStatusEventAsync(_context, (const uint8_t*)[code UTF8String], (const uint8_t*)[level UTF8String]);
 }
 
+- (void)textFieldDidChange:(UITextField *)textField {
+    if(textField == _textField)
+        [self sendEvent:@"AirSharedCredentialsTextInputEvent_textChanged" level:textField.text];
+}
+
 # pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -177,6 +182,9 @@ DEFINE_ANE_FUNCTION(textInput_create) {
         controller.textField = text;
         
         controller.textField.delegate = controller;
+        [controller.textField addTarget:controller action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        
+        
         
     }
     @catch (NSException *exception) {
@@ -295,6 +303,9 @@ DEFINE_ANE_FUNCTION(textInput_destroy) {
         return AirSharedCredentials_FPANE_CreateError(@"Context does not have an textInput controller", 0);
     
     @try {
+        
+        [controller.textField removeTarget:controller action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        
         if(controller.textField) {
             [controller.textField removeFromSuperview];
             controller.textField.delegate = nil;
