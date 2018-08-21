@@ -351,6 +351,44 @@ DEFINE_ANE_FUNCTION(textInput_hide) {
     return nil;
 }
 
+DEFINE_ANE_FUNCTION(textInput_getAlpha) {
+    
+    AirSharedCredentialsTextInput* controller;
+    FREGetContextNativeData(context, (void**)&controller);
+    
+    if (controller == nil)
+        return AirSharedCredentials_FPANE_CreateError(@"Context does not have an textInput controller", 0);
+    @try {
+        
+        if(controller.textField) {
+            return AirSharedCredentials_FPANE_DoubleToFREObject(controller.textField.alpha);
+        }
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to get textField alpha : " stringByAppendingString:exception.reason]];
+    }
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(textInput_setAlpha) {
+    
+    AirSharedCredentialsTextInput* controller;
+    FREGetContextNativeData(context, (void**)&controller);
+    
+    if (controller == nil)
+        return AirSharedCredentials_FPANE_CreateError(@"Context does not have an textInput controller", 0);
+    @try {
+        CGFloat alpha = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[0]));
+        if(controller.textField) {
+            controller.textField.alpha = alpha;
+        }
+    }
+    @catch (NSException *exception) {
+        [controller sendLog:[@"Exception occured while trying to set textField alpha : " stringByAppendingString:exception.reason]];
+    }
+    return nil;
+}
+
 # pragma mark - list functions
 
 void AirSharedCredentialsTextInputListFunctions(const FRENamedFunction** functionsToSet, uint32_t* numFunctionsToSet, FREContext ctx) {
@@ -367,7 +405,9 @@ void AirSharedCredentialsTextInputListFunctions(const FRENamedFunction** functio
         MAP_FUNCTION(textInput_setFrame, NULL),
         MAP_FUNCTION(textInput_destroy, NULL),
         MAP_FUNCTION(textInput_show, NULL),
-        MAP_FUNCTION(textInput_hide, NULL)
+        MAP_FUNCTION(textInput_hide, NULL),
+        MAP_FUNCTION(textInput_getAlpha, NULL),
+        MAP_FUNCTION(textInput_setAlpha, NULL)
         
     };
     

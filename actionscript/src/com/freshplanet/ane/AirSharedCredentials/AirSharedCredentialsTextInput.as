@@ -118,6 +118,20 @@ package com.freshplanet.ane.AirSharedCredentials {
 			_context.call("textInput_hide");
 		}
 
+		/**
+		 * Get textField alpha
+		 */
+		public function get alpha():Number {
+			return _context.call("textInput_getAlpha") as Number;
+		}
+
+		/**
+		 * Set textField alpha
+		 */
+		public function set alpha(value:Number):void {
+			_context.call("textInput_setAlpha", value);
+		}
+
 		// --------------------------------------------------------------------------------------//
 		//																						 //
 		// 									 	PRIVATE API										 //
