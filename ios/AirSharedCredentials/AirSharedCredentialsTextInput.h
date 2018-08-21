@@ -16,7 +16,7 @@
 #import <UIKit/UIKit.h>
 #import "FPANEUtils.h"
 
-@interface AirSharedCredentialsTextInput : UITextField<UITextFieldDelegate>
+@interface AirSharedCredentialsTextInput : UITextField<UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @end
 

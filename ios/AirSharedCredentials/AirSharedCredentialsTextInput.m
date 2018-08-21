@@ -100,6 +100,12 @@
     return YES;
 }
 
+# pragma mark UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
 @end
 
 DEFINE_ANE_FUNCTION(textInput_create) {
@@ -165,6 +171,7 @@ DEFINE_ANE_FUNCTION(textInput_create) {
         controller.tapRecognizer =
         [[UITapGestureRecognizer alloc] initWithTarget:controller
                                                 action:@selector(handleSingleTap:)];
+        controller.tapRecognizer.delegate = controller;
         [rootViewController.view addGestureRecognizer:controller.tapRecognizer];
         
         controller.textField = text;
