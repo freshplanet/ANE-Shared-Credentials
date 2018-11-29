@@ -132,13 +132,15 @@ DEFINE_ANE_FUNCTION(textInput_create) {
         NSString* placeholder = AirSharedCredentials_FPANE_FREObjectToNSString((argv[4]));
         NSString* fontName = AirSharedCredentials_FPANE_FREObjectToNSString((argv[5]));
         NSInteger fontColor = AirSharedCredentials_FPANE_FREObjectToInt((argv[6]));
-        NSInteger fontSize = AirSharedCredentials_FPANE_FREObjectToInt((argv[7]));
-        NSString* contentType = AirSharedCredentials_FPANE_FREObjectToNSString((argv[8]));
-        NSString* keyboardType = AirSharedCredentials_FPANE_FREObjectToNSString((argv[9]));
-        UIImage* icon = argc > 10 ? AirSharedCredentials_FPANE_FREBitmapDataToUIImage(argv[10]) : nil;
+        NSInteger placeholderColor = AirSharedCredentials_FPANE_FREObjectToInt((argv[7]));
+        NSInteger fontSize = AirSharedCredentials_FPANE_FREObjectToInt((argv[8]));
+        NSString* contentType = AirSharedCredentials_FPANE_FREObjectToNSString((argv[9]));
+        NSString* keyboardType = AirSharedCredentials_FPANE_FREObjectToNSString((argv[10]));
+        UIImage* icon = argc > 10 ? AirSharedCredentials_FPANE_FREBitmapDataToUIImage(argv[11]) : nil;
         
         UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         UIColor *textColor = UIColorFromRGB(fontColor);
+        UIColor *placeholderTextColor = UIColorFromRGB(placeholderColor);
         CGRect rect = CGRectMake(x, y, width, height);
         UITextField* text = [[UITextField alloc] initWithFrame:rect];
         
@@ -156,6 +158,8 @@ DEFINE_ANE_FUNCTION(textInput_create) {
         text.textColor = textColor;
         text.backgroundColor = [UIColor whiteColor];
         
+        text.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: placeholderTextColor}];
+        
         if([[UIDevice currentDevice] systemVersion].floatValue >= 11.0) {
             text.textContentType = [controller stringToUITextContentType:contentType];
         }
@@ -165,7 +169,6 @@ DEFINE_ANE_FUNCTION(textInput_create) {
         }
         
         [text setFont:[UIFont fontWithName:fontName size:fontSize]];
-        [text setPlaceholder:placeholder];
         
         text.keyboardType = [controller stringToUIKeyboardType:keyboardType];
         text.autocapitalizationType = UITextAutocapitalizationTypeNone;

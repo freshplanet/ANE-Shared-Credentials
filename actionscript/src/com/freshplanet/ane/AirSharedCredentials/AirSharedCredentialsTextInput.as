@@ -37,17 +37,18 @@ package com.freshplanet.ane.AirSharedCredentials {
 		 * @param placeholder ghost/placeholder text
 		 * @param fontName name of the font to be used
 		 * @param fontColor color of the font to be used
+		 * @param placeholderColor color of the placeholder text
 		 * @param textSize size of text
 		 * @param contentType UITextContentType string
 		 * @param keyboardType UIKeyboardType string
 		 * @param icon bitmap data of the icon to be displayed as the 'leftView' of UITextField
 		 */
-		public function create(frame:Rectangle, placeholder:String, fontName:String, fontColor:uint, textSize:int, contentType:String, keyboardType:String = "UIKeyboardTypeDefault", icon:BitmapData = null):void {
+		public function create(frame:Rectangle, placeholder:String, fontName:String, fontColor:uint, placeholderColor:uint, textSize:int, contentType:String, keyboardType:String = "UIKeyboardTypeDefault", icon:BitmapData = null):void {
 			this._frame = frame;
 			if(icon)
-				_context.call("textInput_create", frame.x, frame.y, frame.width, frame.height, placeholder, fontName, fontColor, textSize, contentType, keyboardType, icon);
+				_context.call("textInput_create", frame.x, frame.y, frame.width, frame.height, placeholder, fontName, fontColor, placeholderColor, textSize, contentType, keyboardType, icon);
 			else
-				_context.call("textInput_create", frame.x, frame.y, frame.width, frame.height, placeholder, fontName, fontColor, textSize, contentType, keyboardType);
+				_context.call("textInput_create", frame.x, frame.y, frame.width, frame.height, placeholder, fontName, fontColor, placeholderColor, textSize, contentType, keyboardType);
 		}
 
 		/**
