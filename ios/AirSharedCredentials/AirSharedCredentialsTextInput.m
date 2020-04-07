@@ -179,6 +179,7 @@ DEFINE_ANE_FUNCTION(textInput_create) {
         controller.tapRecognizer =
         [[UITapGestureRecognizer alloc] initWithTarget:controller
                                                 action:@selector(handleSingleTap:)];
+        controller.tapRecognizer.cancelsTouchesInView = false;
         controller.tapRecognizer.delegate = controller;
         [rootViewController.view addGestureRecognizer:controller.tapRecognizer];
         
@@ -306,12 +307,12 @@ DEFINE_ANE_FUNCTION(textInput_destroy) {
         return AirSharedCredentials_FPANE_CreateError(@"Context does not have an textInput controller", 0);
     
     @try {
-        
-        [controller.textField removeTarget:controller action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-        
         if(controller.textField) {
+            [controller.textField removeTarget:controller action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        
             [controller.textField removeFromSuperview];
             controller.textField.delegate = nil;
+            controller.textField = nil;
         }
         
         

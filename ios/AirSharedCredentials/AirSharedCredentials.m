@@ -15,6 +15,7 @@
 
 #import "AirSharedCredentials.h"
 #import "AirSharedCredentialsTextInput.h"
+#import "AirSharedCredentialAppleAuthButton.h"
 #import "SharedWebCredentials.h"
 
 @interface AirSharedCredentials ()
@@ -122,6 +123,9 @@ void AirSharedCredentialsContextInitializer(void* extData, const uint8_t* ctxTyp
     
     if (strcmp((char*)ctxType, "textInput") == 0) {
         AirSharedCredentialsTextInputListFunctions(functionsToSet, numFunctionsToTest, ctx);
+    }
+    else if (strcmp((char*)ctxType, "appleAuth") == 0) {
+        AirSharedCredentialsAppleAuthListFunctions(functionsToSet, numFunctionsToTest, ctx);
     }
     else {
         AirSharedCredentials* controller = [[AirSharedCredentials alloc] initWithContext:ctx];

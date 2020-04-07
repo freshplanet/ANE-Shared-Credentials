@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1669A14A2DFED9AF09592173 /* libPods-AirSharedCredentials.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35708F94020243352E35E1A8 /* libPods-AirSharedCredentials.a */; };
+		FA7AADB22422835100B7A4B4 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7AADB12422835100B7A4B4 /* AuthenticationServices.framework */; };
+		FA7AADB52422882600B7A4B4 /* AirSharedCredentialAppleAuthButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7AADB42422882600B7A4B4 /* AirSharedCredentialAppleAuthButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FAEC6194212B2FB9001E2D2B /* AirSharedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEC6193212B2FB9001E2D2B /* AirSharedCredentials.m */; };
 		FAEC6195212B2FB9001E2D2B /* AirSharedCredentials.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FAEC6192212B2FB9001E2D2B /* AirSharedCredentials.h */; };
 		FAEC619E212B30E8001E2D2B /* FPANEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEC619D212B30E8001E2D2B /* FPANEUtils.m */; };
@@ -33,6 +35,9 @@
 		0A5D7B7F975DAC6D49F9EFCF /* Pods-AirSharedCredentials.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirSharedCredentials.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirSharedCredentials/Pods-AirSharedCredentials.debug.xcconfig"; sourceTree = "<group>"; };
 		35708F94020243352E35E1A8 /* libPods-AirSharedCredentials.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirSharedCredentials.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6DF3C6474AEC58806C852BD /* Pods-AirSharedCredentials.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirSharedCredentials.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirSharedCredentials/Pods-AirSharedCredentials.release.xcconfig"; sourceTree = "<group>"; };
+		FA7AADB12422835100B7A4B4 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AuthenticationServices.framework; sourceTree = DEVELOPER_DIR; };
+		FA7AADB32422882600B7A4B4 /* AirSharedCredentialAppleAuthButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirSharedCredentialAppleAuthButton.h; sourceTree = "<group>"; };
+		FA7AADB42422882600B7A4B4 /* AirSharedCredentialAppleAuthButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirSharedCredentialAppleAuthButton.m; sourceTree = "<group>"; };
 		FAEC618F212B2FB9001E2D2B /* libAirSharedCredentials.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirSharedCredentials.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEC6192212B2FB9001E2D2B /* AirSharedCredentials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirSharedCredentials.h; sourceTree = "<group>"; };
 		FAEC6193212B2FB9001E2D2B /* AirSharedCredentials.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirSharedCredentials.m; sourceTree = "<group>"; };
@@ -51,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA7AADB22422835100B7A4B4 /* AuthenticationServices.framework in Frameworks */,
 				FAEC61A6212B3249001E2D2B /* Security.framework in Frameworks */,
 				1669A14A2DFED9AF09592173 /* libPods-AirSharedCredentials.a in Frameworks */,
 			);
@@ -62,6 +68,7 @@
 		5EEECBCC43F1626B1F48A50E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA7AADB12422835100B7A4B4 /* AuthenticationServices.framework */,
 				FAEC61A5212B3249001E2D2B /* Security.framework */,
 				35708F94020243352E35E1A8 /* libPods-AirSharedCredentials.a */,
 			);
@@ -98,6 +105,8 @@
 				FAEC619F212B314D001E2D2B /* SharedWebCredentials.m */,
 				FAEC6192212B2FB9001E2D2B /* AirSharedCredentials.h */,
 				FAEC6193212B2FB9001E2D2B /* AirSharedCredentials.m */,
+				FA7AADB32422882600B7A4B4 /* AirSharedCredentialAppleAuthButton.h */,
+				FA7AADB42422882600B7A4B4 /* AirSharedCredentialAppleAuthButton.m */,
 			);
 			path = AirSharedCredentials;
 			sourceTree = "<group>";
@@ -191,6 +200,7 @@
 			files = (
 				FAEC619E212B30E8001E2D2B /* FPANEUtils.m in Sources */,
 				FAEC61A1212B314D001E2D2B /* SharedWebCredentials.m in Sources */,
+				FA7AADB52422882600B7A4B4 /* AirSharedCredentialAppleAuthButton.m in Sources */,
 				FAEC6194212B2FB9001E2D2B /* AirSharedCredentials.m in Sources */,
 				FAEC61A4212B3170001E2D2B /* AirSharedCredentialsTextInput.m in Sources */,
 			);
