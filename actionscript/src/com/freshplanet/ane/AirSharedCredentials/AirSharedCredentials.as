@@ -75,6 +75,24 @@ public class AirSharedCredentials extends EventDispatcher {
 		_context.call("deleteAccount", account, fqdn);
 	}
 
+
+	/**
+	 * "Sign in with Apple" button
+	 */
+
+	/**
+	 * Get native AuthorizationAppleIDButton instance
+	 * @return
+	 */
+	public function getAppleAuthButton() : AirSharedCredentialsAppleAuthButton {
+		if (!isIOS) return null;
+
+		var ctx:ExtensionContext = ExtensionContext.createExtensionContext(EXTENSION_ID,
+				EXTENSION_CONTEXT_APPLE_AUTH);
+
+		return new AirSharedCredentialsAppleAuthButton(ctx);
+	}
+
 	// --------------------------------------------------------------------------------------//
 	//																						 //
 	// 									 	PRIVATE API										 //
@@ -83,6 +101,7 @@ public class AirSharedCredentials extends EventDispatcher {
 
 	private static const EXTENSION_ID : String = "com.freshplanet.ane.AirSharedCredentials";
 	private static const EXTENSION_CONTEXT_TEXT_INPUT:String   = "textInput";
+	private static const EXTENSION_CONTEXT_APPLE_AUTH:String   = "appleAuth";
 
 	private static var _instance : AirSharedCredentials = null;
 	private var _context : ExtensionContext = null;
