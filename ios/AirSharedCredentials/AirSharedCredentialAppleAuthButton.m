@@ -79,12 +79,8 @@
                 [result setValue:appleIDCredential.user forKey:@"user"];
             
             if(appleIDCredential.authorizationCode) {
-                NSUInteger len = appleIDCredential.authorizationCode.length;
-                const unsigned char *buffer = appleIDCredential.authorizationCode.bytes;
-                NSMutableString *tokenString  = [NSMutableString stringWithCapacity:(len * 2)];
-                for (int i = 0; i < len; ++i) {
-                    [tokenString appendFormat:@"%02x", buffer[i]];
-                }
+                
+                NSString *tokenString  = [[NSString alloc] initWithData:appleIDCredential.authorizationCode encoding:NSUTF8StringEncoding];
                 [result setValue:tokenString forKey:@"token"];
             }
                 
