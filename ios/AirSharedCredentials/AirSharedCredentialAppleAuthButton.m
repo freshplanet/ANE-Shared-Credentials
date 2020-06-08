@@ -78,10 +78,15 @@
             if(appleIDCredential.user)
                 [result setValue:appleIDCredential.user forKey:@"user"];
             
+            NSString *tokenString;
             if(appleIDCredential.authorizationCode) {
-                
-                NSString *tokenString  = [[NSString alloc] initWithData:appleIDCredential.authorizationCode encoding:NSUTF8StringEncoding];
+                  tokenString = [[NSString alloc] initWithData:appleIDCredential.authorizationCode encoding:NSUTF8StringEncoding];
                 [result setValue:tokenString forKey:@"token"];
+            }
+            
+            if(appleIDCredential.identityToken) {
+                tokenString  = [[NSString alloc] initWithData:appleIDCredential.identityToken encoding:NSUTF8StringEncoding];
+                [result setValue:tokenString forKey:@"identityToken"];
             }
                 
             

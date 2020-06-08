@@ -135,6 +135,7 @@ package com.freshplanet.ane.AirSharedCredentials {
 						json.name,
 						json.lastName,
 						json.token,
+						json.identityToken,
 						json.email
 				);
 			}catch(e:Error) {

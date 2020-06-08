@@ -8,6 +8,7 @@ package com.freshplanet.ane.AirSharedCredentials {
 		private var _lastName:String;
 		private var _token:String;
 		private var _email:String;
+		private var _identityToken:String;
 
 		public function AirSharedCredentialsAppleCredential(
 				type:AirSharedCredentialsAppleCredentialType,
@@ -16,6 +17,7 @@ package com.freshplanet.ane.AirSharedCredentials {
 				name:String,
 				lastName:String,
 				token:String,
+				identityToken:String,
 				email:String) {
 			_type = type;
 			_user = user;
@@ -23,6 +25,7 @@ package com.freshplanet.ane.AirSharedCredentials {
 			_name = name;
 			_lastName = lastName;
 			_token = token;
+			_identityToken = identityToken;
 			_email = email;
 		}
 
@@ -52,6 +55,10 @@ package com.freshplanet.ane.AirSharedCredentials {
 
 		public function get email():String {
 			return _email;
+		}
+
+		public function get identityToken():String {
+			return _identityToken;
 		}
 	}
 }
