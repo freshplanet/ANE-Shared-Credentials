@@ -14,9 +14,12 @@
  */
 
 #import "AirSharedCredentials.h"
-#import "AirSharedCredentialsTextInput.h"
+#if TARGET_OS_IPHONE
+    #import "AirSharedCredentialsTextInput.h"
+#endif
 #import "AirSharedCredentialAppleAuthButton.h"
 #import "SharedWebCredentials.h"
+
 
 @interface AirSharedCredentials ()
 @property (nonatomic, readonly) FREContext context;
@@ -122,7 +125,9 @@ void AirSharedCredentialsContextInitializer(void* extData, const uint8_t* ctxTyp
                                 uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) {
     
     if (strcmp((char*)ctxType, "textInput") == 0) {
-        AirSharedCredentialsTextInputListFunctions(functionsToSet, numFunctionsToTest, ctx);
+        #if TARGET_OS_IPHONE
+            AirSharedCredentialsTextInputListFunctions(functionsToSet, numFunctionsToTest, ctx);
+        #endif
     }
     else if (strcmp((char*)ctxType, "appleAuth") == 0) {
         AirSharedCredentialsAppleAuthListFunctions(functionsToSet, numFunctionsToTest, ctx);
@@ -138,8 +143,6 @@ void AirSharedCredentialsContextInitializer(void* extData, const uint8_t* ctxTyp
         *numFunctionsToTest = sizeof(functions) / sizeof(FRENamedFunction);
         *functionsToSet = functions;
     }
-    
-    
     
 }
 

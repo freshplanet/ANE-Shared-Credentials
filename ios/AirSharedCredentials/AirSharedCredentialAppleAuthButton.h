@@ -6,10 +6,14 @@
 //  Copyright © 2020 FreshPlanet. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "FPANEUtils.h"
+#include <TargetConditionals.h>
 #import <AuthenticationServices/AuthenticationServices.h>
-
+#if TARGET_OS_IPHONE
+    #import <UIKit/UIKit.h>
+#else
+    #import <AppKit/AppKit.h>
+#endif
 
 @interface AirSharedCredentialAppleAuthButton : NSObject<ASAuthorizationControllerDelegate,ASAuthorizationControllerPresentationContextProviding>
 

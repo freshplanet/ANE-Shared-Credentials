@@ -14,7 +14,10 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#include <TargetConditionals.h>
+#if TARGET_OS_IPHONE
+    #import <UIKit/UIKit.h>
+#endif
 #import "FPANEUtils.h"
 
 @interface AirSharedCredentials : NSObject {

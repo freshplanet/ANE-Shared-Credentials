@@ -66,73 +66,6 @@ NSArray* AirSharedCredentials_FPANE_FREObjectToNSArrayOfNSString(FREObject objec
     return [NSArray arrayWithArray:mutableArray];
 }
 
-UIImage* AirSharedCredentials_FPANE_FREBitmapDataToUIImage(FREObject object) {
-    
-    
-        FREBitmapData bitmapData;
-        UIImage*    image = nil;
-        // Convert item to UIImage. Skip with warning if not possible.
-        if (FREAcquireBitmapData(object, &bitmapData) == FRE_OK) {
-            
-            // make data provider from buffer
-            CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, bitmapData.bits32, (bitmapData.width * bitmapData.height * 4), NULL);
-            
-            // set up for CGImage creation
-            int             bitsPerComponent    = 8;
-            int             bitsPerPixel        = 32;
-            int             bytesPerRow         = 4 * bitmapData.width;
-            CGColorSpaceRef colorSpaceRef       = CGColorSpaceCreateDeviceRGB();
-            CGBitmapInfo    bitmapInfo;
-            
-            if (!bitmapData.hasAlpha)
-                bitmapInfo = kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipFirst;
-            else {
-                
-                if (bitmapData.isPremultiplied)
-                    bitmapInfo = kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst;
-                else
-                    bitmapInfo = kCGBitmapByteOrder32Little | kCGImageAlphaFirst;
-            }
-            
-            CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
-            CGImageRef imageRef = CGImageCreate(bitmapData.width, bitmapData.height, bitsPerComponent,
-                                                bitsPerPixel, bytesPerRow, colorSpaceRef,
-                                                bitmapInfo, provider, NULL, YES, renderingIntent);
-            
-            // make UIImage from CGImage
-            image = [UIImage imageWithCGImage:imageRef];
-            
-            FREReleaseBitmapData(object);
-            
-            NSData* imageData = UIImagePNGRepresentation(image);
-            
-            image = [UIImage imageWithData:imageData];
-            
-        }
-        else {
-            NSLog(@"Couldn't convert FREObject to UIImage");
-        }
-    
-    return image;
-}
-
-NSArray* AirSharedCredentials_FPANE_FREObjectToNSArrayOfUIImage(FREObject object) {
-    
-    uint32_t arrayLength;
-    FREGetArrayLength(object, &arrayLength);
-    
-    NSMutableArray* mutableArray = [NSMutableArray arrayWithCapacity:arrayLength];
-    for (NSInteger i = 0; i < arrayLength; i++) {
-        FREObject itemRaw;
-        FREGetArrayElementAt(object, (uint) i, &itemRaw);
-        
-        UIImage *image = AirSharedCredentials_FPANE_FREBitmapDataToUIImage(itemRaw);
-        [mutableArray addObject:image];
-    }
-    
-    return [NSArray arrayWithArray:mutableArray];
-}
-
 NSDictionary* AirSharedCredentials_FPANE_FREObjectsToNSDictionaryOfNSString(FREObject keys, FREObject values) {
     
     uint32_t numKeys, numValues;
@@ -228,6 +161,9 @@ FREObject AirSharedCredentials_FPANE_CreateError(NSString* error, NSInteger* id)
     
     return ret;
 }
+
+
+#if TARGET_OS_IOS
 
 FREObject AirSharedCredentials_FPANE_UIImageToFREBitmapData(UIImage *image) {
     
@@ -348,5 +284,75 @@ FREObject AirSharedCredentials_FPANE_UIImageToFREByteArray(UIImage *image) {
     
     return newByteArray;
 }
+
+
+UIImage* AirSharedCredentials_FPANE_FREBitmapDataToUIImage(FREObject object) {
+    
+    
+        FREBitmapData bitmapData;
+        UIImage*    image = nil;
+        // Convert item to UIImage. Skip with warning if not possible.
+        if (FREAcquireBitmapData(object, &bitmapData) == FRE_OK) {
+            
+            // make data provider from buffer
+            CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, bitmapData.bits32, (bitmapData.width * bitmapData.height * 4), NULL);
+            
+            // set up for CGImage creation
+            int             bitsPerComponent    = 8;
+            int             bitsPerPixel        = 32;
+            int             bytesPerRow         = 4 * bitmapData.width;
+            CGColorSpaceRef colorSpaceRef       = CGColorSpaceCreateDeviceRGB();
+            CGBitmapInfo    bitmapInfo;
+            
+            if (!bitmapData.hasAlpha)
+                bitmapInfo = kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipFirst;
+            else {
+                
+                if (bitmapData.isPremultiplied)
+                    bitmapInfo = kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst;
+                else
+                    bitmapInfo = kCGBitmapByteOrder32Little | kCGImageAlphaFirst;
+            }
+            
+            CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+            CGImageRef imageRef = CGImageCreate(bitmapData.width, bitmapData.height, bitsPerComponent,
+                                                bitsPerPixel, bytesPerRow, colorSpaceRef,
+                                                bitmapInfo, provider, NULL, YES, renderingIntent);
+            
+            // make UIImage from CGImage
+            image = [UIImage imageWithCGImage:imageRef];
+            
+            FREReleaseBitmapData(object);
+            
+            NSData* imageData = UIImagePNGRepresentation(image);
+            
+            image = [UIImage imageWithData:imageData];
+            
+        }
+        else {
+            NSLog(@"Couldn't convert FREObject to UIImage");
+        }
+    
+    return image;
+}
+
+NSArray* AirSharedCredentials_FPANE_FREObjectToNSArrayOfUIImage(FREObject object) {
+    
+    uint32_t arrayLength;
+    FREGetArrayLength(object, &arrayLength);
+    
+    NSMutableArray* mutableArray = [NSMutableArray arrayWithCapacity:arrayLength];
+    for (NSInteger i = 0; i < arrayLength; i++) {
+        FREObject itemRaw;
+        FREGetArrayElementAt(object, (uint) i, &itemRaw);
+        
+        UIImage *image = AirSharedCredentials_FPANE_FREBitmapDataToUIImage(itemRaw);
+        [mutableArray addObject:image];
+    }
+    
+    return [NSArray arrayWithArray:mutableArray];
+}
+
+#endif
 
 
