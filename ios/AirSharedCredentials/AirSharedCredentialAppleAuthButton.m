@@ -8,12 +8,11 @@
 
 #import "AirSharedCredentialAppleAuthButton.h"
 
-
 @interface AirSharedCredentialAppleAuthButton () {
 }
 
 @property(nonatomic, assign) FREContext context;
-@property(nonatomic, assign) ASAuthorizationAppleIDButton* appleButton;
+@property(nonatomic, assign) ASAuthorizationAppleIDButton* appleButton API_AVAILABLE(ios(13.0), macosx(10.15));
 
 
 
@@ -68,7 +67,7 @@
         return nil;
     
     NSMutableDictionary *result = nil;
-    if (@available(iOS 13.0, *)) {
+    if (@available(iOS 13.0, macOS 10.15, *)) {
         result = [[NSMutableDictionary alloc] init];
         
         if ([credential isKindOfClass:[ASAuthorizationAppleIDCredential class]]) {
@@ -121,7 +120,7 @@
 
 - (void)requestCredentials {
 
-    if (@available(iOS 13.0, *)) {
+    if (@available(iOS 13.0, macOS 10.15, *)) {
         
         ASAuthorizationAppleIDProvider *appleIDProvider = [ASAuthorizationAppleIDProvider new];
         ASAuthorizationAppleIDRequest *appleIDRequest = appleIDProvider.createRequest;
@@ -137,24 +136,38 @@
 
 #pragma mark - ASAuthorizationControllerDelegate
 
- - (ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller  API_AVAILABLE(ios(13.0)){
-    UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-     return rootViewController.view.window;
+ - (ASPresentationAnchor)presentationAnchorForAuthorizationController:(ASAuthorizationController *)controller  API_AVAILABLE(ios(13.0), macosx(10.15)) {
+     
+     if (@available(iOS 13.0, *)) {
+        #if TARGET_OS_IPHONE
+         UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+          return rootViewController.view.window;
+        #endif
+     }
+     else if(@available(macOS 10.15, *)){
+         #if TARGET_OS_OSX
+             NSViewController* contentViewController = [[[NSApplication sharedApplication] keyWindow] contentViewController];
+             return contentViewController.view.window;
+         #endif
+              
+     }
+     return nil;
     
 }
 
+
 #pragma mark - ASAuthorizationControllerDelegate
 
-- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization NS_SWIFT_NAME(authorizationController(controller:didCompleteWithAuthorization:))  API_AVAILABLE(ios(13.0)){
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization NS_SWIFT_NAME(authorizationController(controller:didCompleteWithAuthorization:))  API_AVAILABLE(ios(13.0), macosx(10.15)){
     
     NSString *credString = [self convertToJSonString:[self convertASAuthorizationCredentialToDictionary: authorization.credential]];
-    
+        
     [self sendEvent:@"AirSharedCredentialsAppleAuthEvent_success" level:credString];
     
 }
 
 
-- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error  NS_SWIFT_NAME(authorizationController(controller:didCompleteWithError:))  API_AVAILABLE(ios(13.0)){
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error  NS_SWIFT_NAME(authorizationController(controller:didCompleteWithError:))  API_AVAILABLE(ios(13.0), macosx(10.15)){
     NSString *errorMessage;
     if(error.code == ASAuthorizationErrorCanceled) {
         errorMessage = @"UserCanceled";
@@ -178,28 +191,47 @@ DEFINE_ANE_FUNCTION(appleAuth_create) {
     
     
     @try {
-        if (@available(iOS 13.0, *)) {
-            CGFloat screenScale = [UIScreen mainScreen].scale;
+        
+        if (@available(iOS 13.0, macOS 10.15, *)) {
+            CGFloat x = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[0]));
+            CGFloat y = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[1]));
+            CGFloat width = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[2]));
+            CGFloat height = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[3]));
             
-            CGFloat x = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[0])) / screenScale;
-            CGFloat y = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[1])) / screenScale;
-            CGFloat width = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[2])) / screenScale;
-            CGFloat height = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[3])) / screenScale;
+            ASAuthorizationAppleIDButton *appleIDButton = [ASAuthorizationAppleIDButton buttonWithType:ASAuthorizationAppleIDButtonTypeSignIn style:ASAuthorizationAppleIDButtonStyleWhite];
             
-            UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-            
-            // Sign In With Apple Button
-            ASAuthorizationAppleIDButton *appleIDButton = [ASAuthorizationAppleIDButton new];
-            appleIDButton.frame =  CGRectMake(x, y, width, height);
-            appleIDButton.cornerRadius = CGRectGetHeight(appleIDButton.frame) * 0.25;
-            [rootViewController.view addSubview:appleIDButton];
             controller.appleButton = appleIDButton;
             
+            #if TARGET_OS_IPHONE
+            CGFloat screenScale = [UIScreen mainScreen].scale;
+            x = x / screenScale;
+            y = y / screenScale;
+            width = width / screenScale;
+            height = height / screenScale;
+            
+            appleIDButton.frame =  CGRectMake(x, y, width, height);
+            appleIDButton.cornerRadius = CGRectGetHeight(appleIDButton.frame) * 0.5;
+            
+            UIViewController* rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+            [rootViewController.view addSubview:appleIDButton];
+            
             [controller.appleButton addTarget:controller action:@selector(requestCredentials) forControlEvents:UIControlEventTouchUpInside];
+            
+            #elif TARGET_OS_OSX
+            
+            appleIDButton.frame =  CGRectMake(x, y, width, height);
+            appleIDButton.cornerRadius = CGRectGetHeight(appleIDButton.frame) * 0.5;
+            
+            NSViewController* rootViewController = [[[NSApplication sharedApplication] keyWindow] contentViewController];
+            [rootViewController.view addSubview:appleIDButton];
+            [controller.appleButton setTarget:controller];
+            [controller.appleButton setAction:@selector(requestCredentials)];
+            
+            #endif
+            
         }
         else
-            [controller sendEvent:@"AirSharedCredentialsAppleAuthEvent_error" level:@"Available only on iOS >= 13"];
-        
+            [controller sendEvent:@"AirSharedCredentialsAppleAuthEvent_error" level:@"Available only on iOS >= 13 or macOS >= 10.15"];
     }
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to createAppleAuthButton : " stringByAppendingString:exception.reason]];
@@ -218,16 +250,30 @@ DEFINE_ANE_FUNCTION(appleAuth_setFrame) {
         return AirSharedCredentials_FPANE_CreateError(@"Context does not have an AppleAuthButton controller", 0);
     
     @try {
-        if(controller.appleButton){
-            CGFloat screenScale = [UIScreen mainScreen].scale;
+        
+        if (@available(iOS 13.0, macOS 10.15, *)) {
+            CGFloat x = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[0]));
+            CGFloat y = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[1]));
+            CGFloat width = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[2]));
+            CGFloat height = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[3]));
             
-            CGFloat x = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[0])) / screenScale;
-            CGFloat y = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[1])) / screenScale;
-            CGFloat width = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[2])) / screenScale;
-            CGFloat height = (CGFloat)AirSharedCredentials_FPANE_FREObjectToDouble((argv[3])) / screenScale;
-            
-            CGRect rect = CGRectMake(x, y, width, height);
-            controller.appleButton.frame = rect;
+            if(controller.appleButton) {
+                
+                #if TARGET_OS_IPHONE
+                CGFloat screenScale = [UIScreen mainScreen].scale;
+                x = x / screenScale;
+                y = y / screenScale;
+                width = width / screenScale;
+                height = height / screenScale;
+                #endif
+                
+                CGRect rect = CGRectMake(x, y, width, height);
+                controller.appleButton.frame = rect;
+                
+            }
+        }
+        else {
+            [controller sendEvent:@"AirSharedCredentialsAppleAuthEvent_error" level:@"Available only on iOS >= 13 or macOS >= 10.15"];
         }
             
     }
@@ -246,8 +292,10 @@ DEFINE_ANE_FUNCTION(appleAuth_show) {
         return AirSharedCredentials_FPANE_CreateError(@"Context does not have an AppleAuthButton controller", 0);
     
     @try {
-        if(controller.appleButton){
-            [controller.appleButton setHidden:false];
+        if (@available(iOS 13.0, macOS 10.15, *)) {
+            if(controller.appleButton){
+                [controller.appleButton setHidden:false];
+            }
         }
             
     }
@@ -266,8 +314,10 @@ DEFINE_ANE_FUNCTION(appleAuth_hide) {
         return AirSharedCredentials_FPANE_CreateError(@"Context does not have an AppleAuthButton controller", 0);
     
     @try {
-        if(controller.appleButton){
-            [controller.appleButton setHidden:true];
+        if (@available(iOS 13.0, macOS 10.15, *)) {
+            if(controller.appleButton){
+                [controller.appleButton setHidden:true];
+            }
         }
             
     }
@@ -286,12 +336,20 @@ DEFINE_ANE_FUNCTION(appleAuth_destroy) {
         return AirSharedCredentials_FPANE_CreateError(@"Context does not have an AppleAuthButton controller", 0);
     
     @try {
-        if(controller.appleButton) {
-            [controller.appleButton removeTarget:controller action:@selector(requestCredentials) forControlEvents:UIControlEventTouchUpInside];
-            [controller.appleButton removeFromSuperview];
-            controller.appleButton = nil;
+        if (@available(iOS 13.0, macOS 10.15, *)) {
+            if(controller.appleButton) {
+                
+                #if TARGET_OS_IPHONE
+                [controller.appleButton removeTarget:controller action:@selector(requestCredentials) forControlEvents:UIControlEventTouchUpInside];
+                #elif TARGET_OS_OSX
+                [controller.appleButton setTarget:nil];
+                [controller.appleButton setAction:nil];
+                #endif
+                                
+                [controller.appleButton removeFromSuperview];
+                controller.appleButton = nil;
+            }
         }
-            
     }
     @catch (NSException *exception) {
         [controller sendLog:[@"Exception occured while trying to destroy AppleButton : " stringByAppendingString:exception.reason]];
@@ -328,7 +386,7 @@ DEFINE_ANE_FUNCTION(appleAuth_getCredentialState) {
         
         NSString *userId = AirSharedCredentials_FPANE_FREObjectToNSString(argv[0]);
         
-        if (@available(iOS 13.0, *)) {
+        if (@available(iOS 13.0, macOS 10.15, *)) {
             ASAuthorizationAppleIDProvider *provider = [ASAuthorizationAppleIDProvider new];
             [provider getCredentialStateForUserID:userId completion:^(ASAuthorizationAppleIDProviderCredentialState credentialState, NSError * _Nullable error) {
                 

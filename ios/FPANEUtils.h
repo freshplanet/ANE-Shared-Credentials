@@ -14,7 +14,11 @@
  */
 #import <Foundation/Foundation.h>
 #import "FlashRuntimeExtensions.h"
-#import <UIKit/UIKit.h>
+#include "TargetConditionals.h"
+#if TARGET_OS_IOS
+    #import <UIKit/UIKit.h>
+#endif
+
 
 #define DEFINE_ANE_FUNCTION(fn) FREObject fn(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
 #define MAP_FUNCTION(fn, data) { (const uint8_t*)(#fn), (data), &(fn) }
@@ -37,8 +41,10 @@ FREObject AirSharedCredentials_FPANE_IntToFREObject(NSInteger i);
 FREObject AirSharedCredentials_FPANE_DoubleToFREObject(double d);
 FREObject AirSharedCredentials_FPANE_NSStringToFREObject(NSString* string);
 FREObject AirSharedCredentials_FPANE_CreateError(NSString* error, NSInteger* id);
+
+#if TARGET_OS_IOS
 FREObject AirSharedCredentials_FPANE_UIImageToFREBitmapData(UIImage *image);
 FREObject AirSharedCredentials_FPANE_UIImageToFREByteArray(UIImage *image);
-
 UIImage* AirSharedCredentials_FPANE_FREBitmapDataToUIImage(FREObject object);
 NSArray* AirSharedCredentials_FPANE_FREObjectToNSArrayOfUIImage(FREObject object);
+#endif
