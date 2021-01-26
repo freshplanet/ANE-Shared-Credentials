@@ -28,7 +28,17 @@ public class AirSharedCredentials extends EventDispatcher {
 
 	/** AirSharedCredentials is supported on iOS devices. */
 	public static function get isSupported() : Boolean {
-		return isIOS;
+		var isMacOSMojave:Boolean = false;
+
+		if(Capabilities.os.indexOf("Mac OS") > -1) {
+			var versionParts:Array = Capabilities.os.match(/(\d+)/g);
+			isMacOSMojave =  versionParts && versionParts.length >= 2 && int(versionParts[0]) >= 10 && int(versionParts[1]) >= 15;
+		}
+		return isiOS || isMacOSMojave;
+	}
+
+	private static function get isiOS():Boolean {
+		return Capabilities.manufacturer.indexOf("iOS") > -1 && Capabilities.os.indexOf("x86_64") < 0 && Capabilities.os.indexOf("i386") < 0;
 	}
 
 	/**
@@ -44,7 +54,7 @@ public class AirSharedCredentials extends EventDispatcher {
 	 * @return
 	 */
 	public function getTextInput() : AirSharedCredentialsTextInput {
-		if (!isIOS) return null;
+		if (!isiOS) return null;
 
 		var ctx:ExtensionContext = ExtensionContext.createExtensionContext(EXTENSION_ID,
 				EXTENSION_CONTEXT_TEXT_INPUT);
@@ -59,7 +69,7 @@ public class AirSharedCredentials extends EventDispatcher {
 	 * @param fqdn fully qualified domain name
 	 */
 	public function saveAccount(account:String, password:String, fqdn:String) : void {
-		if (!isIOS) return;
+		if (!isSupported) return;
 
 		_context.call("saveAccount", account, password, fqdn);
 	}
@@ -70,7 +80,7 @@ public class AirSharedCredentials extends EventDispatcher {
 	 * @param fqdn fully qualified domain name
 	 */
 	public function deleteAccount(account:String, fqdn:String) : void {
-		if (!isIOS) return;
+		if (!isSupported) return;
 
 		_context.call("deleteAccount", account, fqdn);
 	}
@@ -85,7 +95,7 @@ public class AirSharedCredentials extends EventDispatcher {
 	 * @return
 	 */
 	public function getAppleAuthButton() : AirSharedCredentialsAppleAuthButton {
-		if (!isIOS) return null;
+		if (!isSupported) return null;
 
 		var ctx:ExtensionContext = ExtensionContext.createExtensionContext(EXTENSION_ID,
 				EXTENSION_CONTEXT_APPLE_AUTH);
@@ -130,9 +140,6 @@ public class AirSharedCredentials extends EventDispatcher {
 			trace("[AirSharedCredentials]: ", event.level);
 			return;
 		}
-	}
-	private static function get isIOS():Boolean {
-		return Capabilities.manufacturer.indexOf("iOS") > -1 && Capabilities.os.indexOf("x86_64") < 0 && Capabilities.os.indexOf("i386") < 0;
 	}
 
 }
