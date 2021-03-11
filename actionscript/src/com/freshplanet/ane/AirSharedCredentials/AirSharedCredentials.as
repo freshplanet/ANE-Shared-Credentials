@@ -32,7 +32,7 @@ public class AirSharedCredentials extends EventDispatcher {
 
 		if(Capabilities.os.indexOf("Mac OS") > -1) {
 			var versionParts:Array = Capabilities.os.match(/(\d+)/g);
-			isMacOSMojave =  versionParts && versionParts.length >= 2 && int(versionParts[0]) >= 10 && int(versionParts[1]) >= 15;
+			isMacOSMojave =  versionParts && versionParts.length >= 2 && int(versionParts[0]) >= 11 || ((int(versionParts[0]) >= 10 && int(versionParts[1]) >= 15))
 		}
 		return isiOS || isMacOSMojave;
 	}
