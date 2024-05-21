@@ -1,0 +1,9 @@
+build/build.config
+
+# Xcode
+xcuserdata
+
+# OS X
+Icon
+Thumbs.db
+.DS_Store

@@ -63,8 +63,12 @@
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
 {
-    if(_textField)
-        [_textField resignFirstResponder];
+    if(_textField) {
+        CGPoint touchPoint = [recognizer locationInView:_textField.superview];
+        if (!CGRectContainsPoint(_textField.frame, touchPoint)) {
+            [_textField resignFirstResponder];
+        }
+    }
 
 }
 
